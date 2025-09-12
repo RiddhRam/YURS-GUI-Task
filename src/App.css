@@ -78,6 +78,17 @@ button.active {
   border: 3px solid;
   border-color: #535bf2;
 }
+button.delete-button {
+  height: 34px;
+  margin: 0;
+  padding: 0;
+  background: #a33;
+  color: #fff;
+}
+button.delete-button:hover {
+  background-color: #a11;
+  border-color: #f55;
+}
 
 ul {
   padding-left: 0;
