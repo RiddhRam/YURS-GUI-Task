@@ -9,16 +9,19 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
   );
 
   return (
-    <ul>
-      {filteredTasks.map((task, index) => (
-        <TaskListItem
-          key={index}
-          name={task.name}
-          description={task.description}
-          date={task.date}
-          completed={task.completed}
-        />
-      ))}
-    </ul>
+    <div  style={{ height: '400px', overflowY: 'auto' }}>
+      <ul>
+        {filteredTasks.map((task, index) => (
+          <TaskListItem
+            key={index}
+            name={task.name}
+            description={task.description}
+            date={task.date}
+            completed={task.completed}
+          />
+        ))}
+      </ul>
+    </div>
+    
   )
 }
