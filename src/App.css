@@ -89,6 +89,21 @@ button.delete-button:hover {
   background-color: #a11;
   border-color: #f55;
 }
+button.complete-button {
+  height: 34px;
+  margin: 0;
+  padding: 0;
+  background: #39ff14;
+  color: #000;
+}
+button.complete-button:hover {
+  background-color: #28ff03;
+  border-color: #2bc60f;
+}
+button.complete-button:disabled {
+  background: #083800;
+  color: #c2c2c2;
+}
 
 ul {
   padding-left: 0;

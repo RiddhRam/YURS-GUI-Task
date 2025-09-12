@@ -3,5 +3,5 @@ export interface TaskListData {
   name: string;
   description: string;
   date: Date;
-  completed: Boolean;
+  completed: boolean;
 }

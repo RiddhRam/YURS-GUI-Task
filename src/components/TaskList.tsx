@@ -43,8 +43,17 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
   );
 
   // Function to delete a given task
-  const handleDelete = (taskToDelete: TaskListData) => {
+  const onDelete = (taskToDelete: TaskListData) => {
     setToDoTasks(prevTasks => prevTasks.filter((task => task !== taskToDelete)));
+  };
+
+  // Function to complete a given task
+  const onComplete = (taskToComplete: TaskListData) => {
+    setToDoTasks(prevTasks =>
+      prevTasks.map(task =>
+        task === taskToComplete ? { ...task, completed: true } : task
+      )
+    );
   };
 
   return (
@@ -57,7 +66,8 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
             description={task.description}
             date={task.date}
             completed={task.completed}
-            onDelete={() => handleDelete(task)}
+            onDelete={() => onDelete(task)}
+            onComplete={() => onComplete(task)}
           />
         ))}
       </ul>
