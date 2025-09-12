@@ -70,13 +70,13 @@ button:hover {
   border-color: #646cff;
 }
 button:focus-visible {
+  border-color: #535bf2;
   outline: 4px auto -webkit-focus-ring-color;
 }
 button.active {
-  background-color: #39ff14;
+  background: #19a5f1;
   color: black;
-  border: 3px solid;
-  border-color: #535bf2;
+  border: 3px solid #19a5f1;
 }
 button.delete-button {
   height: 34px;
@@ -86,8 +86,26 @@ button.delete-button {
   color: #fff;
 }
 button.delete-button:hover {
-  background-color: #a11;
+  background: #a11;
   border-color: #f55;
+}
+button.add-button {
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  background: #39ff14;
+  color: #000;
+}
+button.add-button:hover {
+  background-color: #28ff03;
+  border-color: #2bc60f;
+}
+button.add-task-button {
+  background: #646cff;
+  color: #000;
+}
+button.add-task-button:hover {
+  border-color: #fff;
 }
 button.complete-button {
   height: 34px;
@@ -115,6 +133,12 @@ li {
   padding: 16px;
   margin-bottom: 12px;
   list-style-type: none;
+  max-width: 500px;
+}
+
+input {
+  width: 200px;
+  height: 20px;
 }
 
 @media (prefers-reduced-motion: no-preference) {

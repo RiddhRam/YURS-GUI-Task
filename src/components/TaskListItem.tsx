@@ -8,12 +8,13 @@ export function TaskListItem({ name, description, date, completed, onDelete, onC
   onComplete: () => void
 }) {
   return (
-    <li >
+    <li>
       <div style={{ textAlign: 'left' }}>
-        <h3 style={{ margin: 0 }}>{name}</h3>
-        <span style={{ color: 'rgba(134, 134, 254, 1)' }}>{date.toUTCString().substring(0, date.toUTCString().length - 7)}</span>
+        <h3 style={{ margin: 0, whiteSpace: 'normal', wordBreak: 'break-word' }}>{name}</h3>
+        {/* Trim the time, just keep the date*/}
+        <span style={{ color: 'rgba(134, 134, 254, 1)' }}>{date.toUTCString().substring(0, date.toUTCString().length - 13)}</span>
       </div>
-      <p style={{ marginTop: '8px' }}>{description}</p>
+      <p style={{ marginTop: '8px', whiteSpace: 'normal', wordBreak: 'break-word' }}>{description}</p>
 
       <div className="button-container">
         <button onClick={onComplete} className="complete-button" disabled={completed}>

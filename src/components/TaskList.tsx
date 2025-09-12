@@ -38,6 +38,14 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
     },
   ])
 
+  const [showAddForm, setShowAddForm] = useState(false);
+
+  const [newTask, setNewTask] = useState({
+    name: '',
+    description: '',
+    date: ''
+  });
+
   const filteredTasks = toDoTasks.filter(task =>
     viewToDoScreen ? !task.completed : task.completed
   );
@@ -56,8 +64,57 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
     );
   };
 
+  // Function to add a new task
+  const handleAddTask = () => {
+    // Make sure theres a name and date
+    if (!newTask.name || !newTask.date) return;
+    setToDoTasks(prev => [
+      ...prev,
+      {
+        name: newTask.name,
+        description: newTask.description,
+        date: new Date(newTask.date),
+        completed: false
+      }
+    ]);
+    setNewTask({ name: '', description: '', date: '' });
+    setShowAddForm(false);
+  };
+
   return (
-    <div  style={{ height: '400px', overflowY: 'auto', paddingRight: '10px', paddingLeft: '10px'}}>
+    <div style={{ height: '400px', overflowY: 'auto', paddingRight: '10px', paddingLeft: '10px'}}>
+      {/* Add a task */}
+      { viewToDoScreen ? <>
+        <button className="add-button" onClick={() => setShowAddForm(prev => !prev)}>
+          {showAddForm ? 'Cancel' : 'Add'}
+        </button> 
+        {showAddForm && (
+          <div style={{ margin: '30px 0', display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
+            <input
+              type="text"
+              placeholder="Task Name"
+              value={newTask.name}
+              onChange={e => setNewTask(prev => ({ ...prev, name: e.target.value }))}
+            />
+            <input
+              type="text"
+              placeholder="Description"
+              value={newTask.description}
+              onChange={e => setNewTask(prev => ({ ...prev, description: e.target.value }))}
+            />
+            <input
+              type="date"
+              value={newTask.date}
+              onChange={e => setNewTask(prev => ({ ...prev, date: e.target.value }))}
+            />
+            <button onClick={handleAddTask} className='add-task-button'>Add Task</button>
+          </div>
+        )}
+      </>
+      : 
+      <></> }
+      
+      {/* View tasks */}
       <ul>
         {filteredTasks.map((task, index) => (
           <TaskListItem
