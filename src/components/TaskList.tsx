@@ -36,20 +36,34 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
       date: new Date("2025-10-05"),
       completed: true,
     },
+    {
+      name: "SDMFPPSGRksfalaksf",
+      description: "DSDGDSMfsajksfafsDP",
+      date: undefined,
+      completed: true,
+    },
   ])
 
   const [showAddForm, setShowAddForm] = useState(false);
 
-  const [newTask, setNewTask] = useState({
+  const [newTask, setNewTask] = useState<{
+    name: string;
+    description: string;
+    date?: Date; // optional, can be Date or undefined
+  }>({
     name: '',
     description: '',
-    date: ''
+    date: undefined,
   });
 
   // Filter for only the tasks we want to see, and then sort them by date
   const filteredTasks = toDoTasks
     .filter(task => viewToDoScreen ? !task.completed : task.completed)
-    .sort((a, b) => a.date.getTime() - b.date.getTime());
+    .sort((a, b) => {
+      const timeA = a.date ? new Date(a.date).getTime() : -Infinity;
+      const timeB = b.date ? new Date(b.date).getTime() : -Infinity;
+      return timeA - timeB;
+    });
 
   // Function to delete a given task
   const onDelete = (taskToDelete: TaskListData) => {
@@ -67,18 +81,18 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
 
   // Function to add a new task
   const handleAddTask = () => {
-    // Make sure theres a name and date
-    if (!newTask.name.trim() || !newTask.date) return;
+    // Make sure theres a name
+    if (!newTask.name.trim()) return;
     setToDoTasks(prev => [
       ...prev,
       {
         name: newTask.name,
         description: newTask.description,
-        date: new Date(newTask.date),
+        date: newTask.date,
         completed: false
       }
     ]);
-    setNewTask({ name: '', description: '', date: '' });
+    setNewTask({ name: '', description: '', date: undefined });
     setShowAddForm(false);
   };
 
@@ -106,8 +120,8 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
             />
             <input
               type="date"
-              value={newTask.date}
-              onChange={e => setNewTask(prev => ({ ...prev, date: e.target.value }))}
+              value={newTask.date ? newTask.date.toISOString().split('T')[0] : ''}
+              onChange={e => setNewTask(prev => ({ ...prev, date: e.target.value ? new Date(e.target.value) : undefined }))}
             />
             <button onClick={handleAddTask} className='add-task-button'>Add Task</button>
           </div>

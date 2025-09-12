@@ -2,6 +2,6 @@
 export interface TaskListData {
   name: string;
   description: string;
-  date: Date;
+  date: Date | undefined;
   completed: boolean;
 }
