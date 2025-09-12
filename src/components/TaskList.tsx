@@ -46,9 +46,10 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
     date: ''
   });
 
-  const filteredTasks = toDoTasks.filter(task =>
-    viewToDoScreen ? !task.completed : task.completed
-  );
+  // Filter for only the tasks we want to see, and then sort them by date
+  const filteredTasks = toDoTasks
+    .filter(task => viewToDoScreen ? !task.completed : task.completed)
+    .sort((a, b) => a.date.getTime() - b.date.getTime());
 
   // Function to delete a given task
   const onDelete = (taskToDelete: TaskListData) => {
@@ -67,7 +68,7 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
   // Function to add a new task
   const handleAddTask = () => {
     // Make sure theres a name and date
-    if (!newTask.name || !newTask.date) return;
+    if (!newTask.name.trim() || !newTask.date) return;
     setToDoTasks(prev => [
       ...prev,
       {
@@ -84,7 +85,8 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
   return (
     <div style={{ height: '400px', overflowY: 'auto', paddingRight: '10px', paddingLeft: '10px'}}>
       {/* Add a task */}
-      { viewToDoScreen ? <>
+      { viewToDoScreen && 
+      <>
         <button className="add-button" onClick={() => setShowAddForm(prev => !prev)}>
           {showAddForm ? 'Cancel' : 'Add'}
         </button> 
@@ -111,8 +113,7 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
           </div>
         )}
       </>
-      : 
-      <></> }
+      }
       
       {/* View tasks */}
       <ul>
