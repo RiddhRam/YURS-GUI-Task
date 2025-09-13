@@ -23,7 +23,7 @@ export function TaskListItem({ name, description, date, tags, completed, onDelet
         {/* Trim the time, just keep the date*/}
         <span id={"due-date"}> {date ? date.toUTCString().substring(0, date.toUTCString().length - 13) : ''}</span>
       </div>
-      <p style={{ marginTop: '8px', whiteSpace: 'normal', wordBreak: 'break-word' }}>{description}</p>
+      <p style={{ padding: '16px', whiteSpace: 'normal', wordBreak: 'break-word' }}>{description}</p>
 
       {/* Tags */}
       <div style={{ display: "flex", gap: "8px", marginBottom: "8px" }}>
