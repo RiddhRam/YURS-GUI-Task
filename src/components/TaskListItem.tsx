@@ -21,7 +21,7 @@ export function TaskListItem({ name, description, date, tags, completed, onDelet
       <div style={{ textAlign: 'left' }}>
         <h3 style={{ margin: 0, whiteSpace: 'normal', wordBreak: 'break-word' }}>{name}</h3>
         {/* Trim the time, just keep the date*/}
-        <span style={{ color: 'rgba(134, 134, 254, 1)' }}> {date ? date.toUTCString().substring(0, date.toUTCString().length - 13) : ''}</span>
+        <span id={"due-date"}> {date ? date.toUTCString().substring(0, date.toUTCString().length - 13) : ''}</span>
       </div>
       <p style={{ marginTop: '8px', whiteSpace: 'normal', wordBreak: 'break-word' }}>{description}</p>
 

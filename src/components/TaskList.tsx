@@ -56,10 +56,12 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
     name: string;
     description: string;
     date?: Date; // optional, can be Date or undefined
+    tags: string;
   }>({
     name: '',
     description: '',
     date: undefined,
+    tags: ''
   });
 
   // Filter for only the tasks we want to see, and then sort them by date
@@ -95,11 +97,11 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
         name: newTask.name,
         description: newTask.description,
         date: newTask.date,
-        tags: [],
+        tags: newTask.tags.split(',').slice(0, 3),
         completed: false
       }
     ]);
-    setNewTask({ name: '', description: '', date: undefined });
+    setNewTask({ name: '', description: '', date: undefined, tags: '' });
     setShowAddForm(false);
   };
 
@@ -122,6 +124,7 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
         </button> 
         {showAddForm && (
           <div style={{ margin: '30px 0', display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
+
             <input
               type="text"
               placeholder="Task Name"
@@ -139,6 +142,15 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
               value={newTask.date ? newTask.date.toISOString().split('T')[0] : ''}
               onChange={e => setNewTask(prev => ({ ...prev, date: e.target.value ? new Date(e.target.value) : undefined }))}
             />
+
+            {/* Tags */}
+            <input
+              type="text"
+              placeholder="Tags (Seperate by commas)"
+              value={newTask.tags}
+              onChange={e => setNewTask(prev => ({ ...prev, tags: e.target.value }))}
+            />
+
             <button onClick={handleAddTask} className='add-item-button'>Add Task</button>
           </div>
         )}

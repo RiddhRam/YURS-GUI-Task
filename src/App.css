@@ -52,7 +52,8 @@ p {
   justify-content: center;
   padding: 4px 8px;
   border-radius: 12px;
-  background-color: #828282ff;
+  background-color: #a3d5ff;
+  color: #003366;
   max-width: 200px;
   word-break: break-word;
   text-align: center;
@@ -94,11 +95,11 @@ button.delete-button {
   height: 34px;
   margin: 0;
   padding: 0;
-  background: #a33;
-  color: #fff;
+  background: #a22;
+  color: #000;
 }
 button.delete-button:hover {
-  background: #a11;
+  background: #a00;
   border-color: #f55;
 }
 button.add-button {
@@ -115,7 +116,7 @@ button.add-button:hover {
 button.add-item-button {
   margin: 0;
   padding: 0;
-  background: #646cff;
+  background: #767dff;
   color: #000;
 }
 button.add-item-button:hover {
@@ -156,6 +157,11 @@ input {
   height: 20px;
 }
 
+#due-date {
+  color: rgb(200, 200, 255);
+  font-weight: 600;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
@@ -170,9 +176,17 @@ input {
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f0f0f0;
   }
+  button.complete-button {
+    background: #35cf1a;
+  }
+  button.delete-button {
+    background: rgb(221, 52, 52);
+  }
+
   p {
     color: #000;
   }
@@ -181,6 +195,10 @@ input {
     border: 3px solid #555;
   }
   .task-tags {
+    background-color: #004a94;
     color: #fff;
+  }
+  #due-date {
+    color: rgb(94, 94, 255);
   }
 }
