@@ -10,36 +10,42 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
       name: "TESTTT",
       description: "123123",
       date: new Date("2025-10-01"),
+      tags: [],
       completed: false,
     },
     {
       name: "DFMPSGSERS",
       description: "ADFDSGDSG",
       date: new Date("2025-10-03"),
+      tags: [],
       completed: true,
     },
     {
       name: "SDMPKFMPG",
       description: "HELLOOOO",
       date: new Date("2025-10-05"),
+      tags: ["Homework"],
       completed: false,
     },
     {
       name: "NOSOGNSGSD",
       description: "Hello world",
       date: new Date("2025-10-01"),
+      tags: ["Homework"],
       completed: true,
     },
     {
       name: "SDMFPPSGR",
       description: "DSDGDSMGSDP",
       date: new Date("2025-10-05"),
+      tags: ["Chores", "Car", "Idk"],
       completed: true,
     },
     {
       name: "SDMFPPSGRksfalaksf",
       description: "DSDGDSMfsajksfafsDP",
       date: undefined,
+      tags: ["Chores", "Car"],
       completed: true,
     },
   ])
@@ -89,6 +95,7 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
         name: newTask.name,
         description: newTask.description,
         date: newTask.date,
+        tags: [],
         completed: false
       }
     ]);
@@ -96,8 +103,17 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
     setShowAddForm(false);
   };
 
+  // Function to add a new tag to the existing task
+  const onAddTag = (tag : string, taskToModify: TaskListData) => {
+    setToDoTasks(prevTasks =>
+      prevTasks.map(task =>
+        task === taskToModify ? { ...task, tags: [...task.tags, tag] } : task
+      )
+    );
+  };
+
   return (
-    <div style={{ height: '400px', overflowY: 'auto', paddingRight: '10px', paddingLeft: '10px'}}>
+    <div style={{ height: '400px', overflowY: 'auto', padding: '10px', border: "5px solid #606060ff", borderRadius: "5px", borderSpacing: "10px"}}>
       {/* Add a task */}
       { viewToDoScreen && 
       <>
@@ -123,7 +139,7 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
               value={newTask.date ? newTask.date.toISOString().split('T')[0] : ''}
               onChange={e => setNewTask(prev => ({ ...prev, date: e.target.value ? new Date(e.target.value) : undefined }))}
             />
-            <button onClick={handleAddTask} className='add-task-button'>Add Task</button>
+            <button onClick={handleAddTask} className='add-item-button'>Add Task</button>
           </div>
         )}
       </>
@@ -137,9 +153,12 @@ export function TaskList({ viewToDoScreen }: { viewToDoScreen: boolean }) {
             name={task.name}
             description={task.description}
             date={task.date}
+            tags={task.tags}
             completed={task.completed}
             onDelete={() => onDelete(task)}
             onComplete={() => onComplete(task)}
+            /* Im presetting the task parameter, TaskListItem just needs to send back the tag being added now */
+            onAddTag={(tag: string) => onAddTag(tag, task)}
           />
         ))}
       </ul>

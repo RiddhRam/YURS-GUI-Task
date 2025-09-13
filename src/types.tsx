@@ -3,5 +3,6 @@ export interface TaskListData {
   name: string;
   description: string;
   date: Date | undefined;
+  tags: string[]
   completed: boolean;
 }

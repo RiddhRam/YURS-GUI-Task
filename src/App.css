@@ -33,7 +33,7 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
+  min-width: 260px;
   min-height: 100vh;
 }
 
@@ -44,6 +44,18 @@ h1 {
 
 p {
   color: #fff;
+}
+
+.task-tags {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background-color: #828282ff;
+  max-width: 200px;
+  word-break: break-word;
+  text-align: center;
 }
 
 .button-container {
@@ -100,11 +112,13 @@ button.add-button:hover {
   background-color: #28ff03;
   border-color: #2bc60f;
 }
-button.add-task-button {
+button.add-item-button {
+  margin: 0;
+  padding: 0;
   background: #646cff;
   color: #000;
 }
-button.add-task-button:hover {
+button.add-item-button:hover {
   border-color: #fff;
 }
 button.complete-button {
@@ -128,12 +142,13 @@ ul {
 }
 
 li {
+  background: rgba(25, 84, 125, 1);
   border: 3px solid #ccc;
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 12px;
   list-style-type: none;
-  max-width: 500px;
+  max-width: 400px;
 }
 
 input {
@@ -160,5 +175,12 @@ input {
   }
   p {
     color: #000;
+  }
+  li {
+    background: rgb(148, 211, 255);
+    border: 3px solid #555;
+  }
+  .task-tags {
+    color: #fff;
   }
 }
